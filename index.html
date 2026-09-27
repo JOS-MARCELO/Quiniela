@@ -82,6 +82,42 @@ tr.pst td{background:#e8e2c4}
 .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--live);margin-right:4px;animation:b 1s infinite alternate}
 @keyframes b{to{opacity:.2}}
 [hidden]{display:none!important}
+  /* ===== Responsive: pantallas chicas (celulares) ===== */
+@media (max-width: 600px){
+  .wrap{padding:12px 8px 40px}
+  header{flex-direction:column;align-items:stretch;gap:8px}
+  header > div{display:flex;flex-direction:column;align-items:flex-start}
+  .btn{font-size:15px;padding:8px 14px}
+  .stamp{text-align:left;max-width:none;font-size:12px}
+  .tab{font-size:15px;padding:7px 12px}
+  .sheet{padding:6px}
+  /* Tabla de la quiniela más compacta */
+  thead th{font-size:12px;padding:4px 1px}
+  thead th .vs{font-size:9px}
+  .q td.name,.q th.name{min-width:92px}
+  .q td.name input{font-size:14px;padding:6px 4px}
+  .pick{height:34px;min-width:30px;font-size:16px}
+  .pts{font-size:17px;min-width:38px}
+  .del{font-size:12px;padding:0 3px}
+  /* Tabla de partidos */
+  .p td{padding:6px 3px;font-size:14px}
+  .p td.team{padding-left:4px}
+  .p td.team.v{padding-right:4px}
+  .p td.mid{min-width:78px}
+  .marc{font-size:19px}
+  .reloj{font-size:15px}
+  .fecha{white-space:normal;font-size:12px}
+  .est{white-space:normal;font-size:12px}
+}
+/* Celulares muy angostos */
+@media (max-width: 380px){
+  h1{font-size:26px}
+  .q td.name,.q th.name{min-width:80px}
+  .q td.name input{font-size:13px}
+  .pick{height:32px;min-width:27px;font-size:15px}
+  .p td{font-size:13px}
+  .src{display:none}
+}
 </style>
 </head>
 <body>
