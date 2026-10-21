@@ -33,6 +33,50 @@ button{cursor:pointer}
 .pill.curso{background:rgba(255,255,255,.22)}
 .pill.fin{background:var(--hit);border-color:var(--hit)}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:16px}
+.stat{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:9px 12px}
+.stat small{display:block;font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;opacity:.75}
+.stat b{font:700 26px/1.15 "IBM Plex Sans Condensed",sans-serif}
+.meta{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:12px;font-size:13px;opacity:.9}
+.meta b{font-weight:700}
+.bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:12px 2px 0;font-size:12.5px;color:var(--muted);font-weight:500}
+.bar .sp{flex:1}
+.refresh{display:inline-flex;align-items:center;gap:8px;min-height:44px;border:0;background:var(--btn);color:var(--btn-ink);border-radius:10px;padding:0 16px;font-weight:600;font-size:14px}
+.refresh:disabled{opacity:.55;cursor:wait}
+.refresh svg{width:16px;height:16px}
+.tabs{display:flex;gap:4px;background:var(--chip);border-radius:12px;padding:4px;margin:14px 0 0}
+.tab{flex:1;min-height:44px;border:0;background:transparent;border-radius:9px;font-weight:600;font-size:14px;color:var(--muted)}
+.tab[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.view{margin-top:14px}
+.view[hidden]{display:none}
+.sbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:15;background:var(--bg);padding:6px 0 10px}
+.search{display:flex;align-items:center;gap:10px;background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:0 14px;min-height:48px}
+.search:focus-within{border-color:var(--btn)}
+.search svg{flex:none;width:18px;height:18px;color:var(--muted)}
+.search input{flex:1;border:0;background:transparent;outline:0;font-size:16px;min-width:0}
+.leaders{margin-bottom:12px;padding:11px 14px;border-radius:10px;background:var(--gold-bg);border-left:4px solid var(--gold);font-weight:600;font-size:14px}
+.leaders[hidden]{display:none}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden}
+.ph{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line)}
+.pt{font:700 18px "IBM Plex Sans Condensed",sans-serif;text-transform:uppercase;letter-spacing:.04em}
+.lock{font-size:11.5px;font-weight:500;color:var(--muted)}
+.cuenta{margin:0;padding:8px 16px;font-size:12px;color:var(--muted);border-bottom:1px solid var(--line);background:var(--bg)}
+.tw{overflow:auto;-webkit-overflow-scrolling:touch;max-height:72vh}
+table{width:100%;border-collapse:separate;border-spacing:0;min-width:660px}
+th{position:sticky;top:0;z-index:2;padding:10px 4px;font-size:12px;font-weight:600;color:var(--muted);background:var(--chip);border-bottom:3px solid var(--line);white-space:nowrap}
+th .vs{display:block;font-size:9.5px;font-weight:500;opacity:.85}
+th.hf{border-bottom-color:var(--hit)}
+th.hl{border-bottom-color:var(--live)}
+th.hc{border-bottom-color:#8C97A6}
+th.hc .vs{text-decoration:line-through}
+td{padding:7px 4px;text-align:center;border-bottom:1px solid var(--line)}
+tr:last-child td{border-bottom:0}
+td.pos{width:44px;font:700 17px "IBM Plex Sans Condensed",sans-serif;color:var(--muted)}
+td.name,th.name{text-align:left;min-width:170px;position:sticky;left:0;z-index:1;background:var(--surface);font-weight:600;font-size:14px;padding-left:10px}
+th.name{z-index:3;background:var(--chip)}
+tbody tr{cursor:pointer}
+tbody tr:hover td{background:var(--chip)}
+tr.lider td,tr.lider td.name{background:var(--gold-bg)}
+tr.lider td.name{box-shadow:inset 4px 0 var(--gold)}
 tr.pin td,tr.pin td.name{background:var(--hit-bg)}
 tr.pin td.name{box-shadow:inset 4px 0 var(--hit)}
 .tag{display:inline-block;margin-left:8px;padding:1px 7px;border-radius:999px;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;vertical-align:middle}
@@ -70,6 +114,148 @@ td.pts{width:72px}
 .legend{display:flex;flex-wrap:wrap;gap:8px 16px;padding:12px 16px 14px;border-top:1px solid var(--line)}
 .li{display:flex;align-items:center;gap:7px;font-size:11.5px;font-weight:500;color:var(--muted)}
 .dot{width:14px;height:14px;border-radius:4px;background:var(--chip);flex:none}
+.dot.g{background:var(--hit)}
+.dot.l{background:transparent;outline:2px dashed var(--live);outline-offset:-1px}
+.dot.y{background:var(--gold)}
+.dot.r{background:var(--hit-bg);border:1px solid var(--hit)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding:14px 16px 0}
+.chip{display:flex;align-items:center;gap:7px;background:var(--chip);border-radius:999px;padding:6px 12px;font-size:12px;font-weight:600}
+.chip i{width:9px;height:9px;border-radius:50%}
+.matches{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:14px 16px}
+.match{background:var(--bg);border:1px solid var(--line);border-left:5px solid var(--line);border-radius:10px;padding:14px}
+.match.live{border-left-color:var(--live)}
+.match.final{border-left-color:var(--hit)}
+.match.canc{border-left-color:#8C97A6;opacity:.85}
+.match.pospu{border-left-color:var(--warn)}
+.mt{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.mn{font-size:11px;font-weight:600;letter-spacing:.07em;color:var(--muted);text-transform:uppercase}
+.st{border-radius:999px;padding:3px 10px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;background:var(--chip);color:var(--muted)}
+.st.live{background:var(--live);color:#fff;animation:pulse 1.4s infinite}
+.st.fin{background:var(--hit);color:#fff}
+.st.canc{background:#6F7B8B;color:#fff}
+.st.pospu{background:var(--warn);color:#fff}
+@keyframes pulse{50%{opacity:.6}}
+.tm{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center}
+.team{padding:8px;border-radius:8px;min-width:0}
+.tn{font:600 19px/1.1 "IBM Plex Sans Condensed",sans-serif;text-transform:uppercase}
+.team.r .tn{text-align:right}
+.team.win{background:var(--hit-bg);color:var(--hit)}
+.team.loss{opacity:.6}
+.team.draw{background:var(--chip)}
+.sc{font:700 30px "IBM Plex Sans Condensed",sans-serif;min-width:70px;text-align:center}
+.sc.live{color:var(--live)}
+.md{margin-top:10px;font-size:12px;font-weight:500;color:var(--muted)}
+.md.live{color:var(--live);font-weight:600}
+.md.warn{color:var(--warn)}
+.footer{padding:18px 4px 0;color:var(--muted);font-size:11.5px;text-align:center;line-height:1.6}
+@media (max-width:759px){.tw{display:none}.cards{display:grid;gap:8px;padding:12px}.lock{font-size:11px;max-width:48%;text-align:right}}
+@media (max-width:640px){
+ .app{padding:10px 10px 96px}
+ .hero{padding:14px}
+ .stats{grid-template-columns:repeat(2,1fr)}
+ .matches{grid-template-columns:1fr}
+ .tn{font-size:17px}
+ .sc{font-size:26px}
+ .tabs{position:fixed;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px));margin:0;z-index:20;background:var(--surface);border:1px solid var(--line);box-shadow:0 8px 28px rgba(0,0,0,.25)}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+<div class="app">
+<header class="hero">
+  <div class="hero-top">
+    <div class="logo" aria-hidden="true">MX</div>
+    <div class="ht"><div class="kicker">Liga BBVA MX · Apertura 2026</div><h1 class="title">Jornada 13</h1><div class="sub">Quiniela · 20 y 21 de octubre</div></div>
+    <span class="pill" id="estado" role="status">Por iniciar</span>
+  </div>
+  <div class="stats">
+    <div class="stat"><small>Finalizados</small><b id="sF">0/9</b></div>
+    <div class="stat"><small>En vivo</small><b id="sV">0</b></div>
+    <div class="stat"><small>Pendientes</small><b id="sPend">9</b></div>
+    <div class="stat"><small>Máx. puntos</small><b id="sM">0</b></div>
+  </div>
+  <div class="meta"><span><b id="sP">0</b> participantes</span><span>Premio <b id="pozo">$0</b> · 90% del pozo ($50 por boleto)</span></div>
+</header>
+
+<div class="bar"><span id="stamp" aria-live="polite">Cargando…</span><span id="nube"></span><span class="sp"></span>
+  <button class="refresh" id="btnRef" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>Actualizar</button></div>
+
+<nav class="tabs" role="tablist" aria-label="Secciones">
+  <button class="tab" role="tab" type="button" aria-selected="true" data-v="q">Quiniela</button>
+  <button class="tab" role="tab" type="button" aria-selected="false" data-v="p">Partidos</button>
+</nav>
+
+<main id="main">
+<section id="vq" class="view">
+  <div class="sbar"><label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="buscar" type="search" placeholder="Busca tu nombre o número…" autocomplete="off" aria-label="Buscar participante"></label></div>
+  <div class="leaders" id="lideres" hidden></div>
+  <div class="panel">
+    <div class="ph"><div class="pt">Tabla de posiciones</div><div class="lock">Solo lectura · toca una fila para fijarla</div></div>
+    <p class="cuenta" id="cuenta" aria-live="polite"></p>
+    <div class="tw"><table><caption class="sr" style="position:absolute;left:-999px">Pronósticos por participante</caption><thead id="thead"></thead><tbody id="tbody"></tbody></table></div>
+    <div id="cards" class="cards" aria-label="Participantes"></div>
+    <div class="more" id="moreBox" hidden><button class="mas" id="mas" type="button"></button></div>
+    <div class="legend">
+      <div class="li"><span class="dot g"></span>Acierto (✓)</div>
+      <div class="li"><span class="dot l"></span>Partido en vivo, provisional</div>
+      <div class="li"><span class="dot y"></span>Líder</div>
+      <div class="li"><span class="dot"></span>Sin acierto o pendiente</div>
+    </div>
+  </div>
+</section>
+
+<section id="vp" class="view" hidden>
+  <div class="panel">
+    <div class="ph"><div class="pt">Partidos</div><div class="lock">Solo lectura</div></div>
+    <div class="chips" id="chips"></div>
+    <div id="matches" class="matches"></div>
+    <div class="legend">
+      <div class="li"><span class="dot r"></span>Ganador</div>
+      <div class="li"><span class="dot"></span>Empate o pendiente</div>
+    </div>
+  </div>
+</section>
+</main>
+
+<div class="footer">Marcadores automáticos (ESPN) · cada 30 s con partido en vivo, cada 60 s sin partido<br>Los partidos en vivo suman puntos provisionales hasta que terminen</div>
+</div>
+
+<script>
+const VERSION="ligamx-j13-2026-v1", KEY="quiniela_ligamx_j13_2026_v1";
+const MANUAL={}; // ej.: {3:{estado:"POSPUESTO"}}  (número de partido → estado)
+const aplicarManual=()=>{partidos=partidos.map(m=>({...m,...(MANUAL[m.n]||{})}))};
+const OCULTAR_NOMBRES=false; // true = en pantalla solo "Participante 01, 02…" (los datos internos no se tocan)
+const nom=g=>OCULTAR_NOMBRES||!g.nombre?"Participante "+String(g.orden).padStart(2,"0"):g.nombre;
+const PREMIO_PCT=0.9; // premio = 90% del pozo (con 50 boletos de $50 da $2,250, como en la hoja)
+const CUOTA=50; // pesos por boleto; el pozo = boletos × cuota
+const CONTAR_EN_VIVO=true; // true = los partidos en vivo suman puntos provisionales; false = solo finalizados
+
+/* ===== EQUIPOS: [nombre, siglas, ...alias exactos (como los escribe ESPN)] ===== */
+const EQ={
+ PUEBLA:["Puebla","PUE","puebla","club puebla"],
+ LEON:["León","LEO","leon","club leon"],
+ TIGRES:["Tigres","TIG","tigres","tigres uanl","uanl"],
+ TOLUCA:["Toluca","TOL","toluca","deportivo toluca"],
+ JUAREZ:["Juárez","JUA","juarez","fc juarez","bravos"],
+ XOLOS:["Tijuana","TIJ","xolos","tijuana","club tijuana","xolos de tijuana","tijuana xolos"],
+ QUERETARO:["Querétaro","QRO","queretaro","queretaro fc","gallos blancos"],
+ ATLANTE:["Atlante","ATE","atlante","atlante fc"],
+ ATLAS:["Atlas","ATS","atlas","atlas fc"],
+ CHIVAS:["Chivas","CHI","chivas","guadalajara","cd guadalajara","chivas de guadalajara"],
+ AMERICA:["América","AME","america","club america"],
+ MONTERREY:["Monterrey","MTY","monterrey","cf monterrey","rayados"],
+ SANLUIS:["San Luis","SLP","san luis","atletico san luis","atletico de san luis"],
+ SANTOS:["Santos","SAN","santos","santos laguna"],
+ PACHUCA:["Pachuca","PAC","pachuca","cf pachuca"],
+ NECAXA:["Necaxa","NEC","necaxa","club necaxa"],
+ PUMAS:["Pumas","PUM","pumas","pumas unam","unam"],
+ CRUZAZUL:["Cruz Azul","CAZ","cruz azul"]
+};
+const PARTIDOS0=[["TIGRES","LEON"],["CHIVAS","NECAXA"],["JUAREZ","ATLANTE"],["SANLUIS","QUERETARO"],["TOLUCA","XOLOS"],["ATLAS","AMERICA"],["PUEBLA","MONTERREY"],["PACHUCA","CRUZAZUL"],["SANTOS","PUMAS"]];
+
+/* ===== PARTICIPANTES (agrega los nuevos al final) ===== */
 const GENTE0=[
 ["Johan Vecino","LLVELVVVV"],["Chela R.S","VLVELVVVL"],["Porno Taquero 69","LLVLLVVVV"],["Candido Lopez","LLLLLVVEL"],["Santiago","LLLELVLLE"],
 ["Marcos","LLEVLVLEL"],["Fores","LLVELVVVE"],["Alfredo 28","LLVVLVLLL"],["Eder Tienda","LLVVLVVEV"],["Hielera","ELLLLEEVL"],
@@ -86,59 +272,4 @@ const GENTE0=[
 /* ===== Estado ===== */
 const $=id=>document.getElementById(id);
 const N=PARTIDOS0.length;
-const limpia=v=>{v=String(v||"").trim().toUpperCase();return v&&"LEV".includes(v)?v:""};
-const padPicks=a=>{a=(a||[]).map(limpia);while(a.length<N)a.push("");return a.slice(0,N)};
-let gente=GENTE0.map((x,i)=>({id:"p"+String(i+1).padStart(2,"0"),orden:i+1,nombre:x[0],picks:padPicks(x[1].split(""))}));
-let partidos=PARTIDOS0.map((p,i)=>({n:i+1,hk:p[0],ak:p[1],local:EQ[p[0]][0],visitante:EQ[p[1]][0],gl:null,gv:null,estado:"PENDIENTE",fecha:null,reloj:""}));
-let ultima=null, filtro="", pinId=null, limite=20;
-try{pinId=localStorage.getItem(KEY+"_pin")}catch(e){}
-
-/* ===== Utilidades ===== */
-const esc=t=>String(t).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const norm=t=>String(t||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim();
-const coincide=(nombre,k)=>{const n=norm(nombre);return EQ[k].slice(2).some(a=>norm(a)===n)}; // coincidencia exacta
-const num=v=>v!==null&&v!==undefined&&v!==""&&Number.isFinite(Number(v));
-const fechaTxt=iso=>{const d=new Date(iso);return iso&&!isNaN(d)?new Intl.DateTimeFormat("es-MX",{weekday:"short",day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"}).format(d):""};
-const hora=iso=>new Date(iso).toLocaleTimeString("es-MX",{hour:"2-digit",minute:"2-digit",second:"2-digit"});
-const esCerrado=m=>["CANCELADO","POSPUESTO","SUSPENDIDO"].includes(m.estado);
-
-function res(m){ // resultado 1X2 (L/E/V); en vivo solo si CONTAR_EN_VIVO
-  if(!m||!num(m.gl)||!num(m.gv))return"";
-  if(m.estado!=="FINALIZADO"&&!(CONTAR_EN_VIVO&&m.estado==="EN VIVO"))return"";
-  const a=Number(m.gl),b=Number(m.gv);
-  return a>b?"L":a<b?"V":"E";
-    $("nube").textContent="Sincronizando…";
-    db.collection("participantes_j13").orderBy("orden").onSnapshot(snap=>{
-      const lista=snap.docs.map(d=>{const x=d.data()||{};return{id:d.id,nombre:String(x.nombre||""),orden:Number(x.orden)||0,picks:padPicks(x.picks)}});
-      if(lista.length){gente=lista;renderQuiniela()}
-      $("nube").textContent="Sincronizado en línea";
-    },e=>{console.warn("nube",e);$("nube").textContent="Sin sincronización en línea (datos locales)"});
-  }catch(e){console.warn(e)}
-}
-
-/* ===== Eventos y arranque ===== */
-document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{
-  document.querySelectorAll(".tab").forEach(x=>x.setAttribute("aria-selected",String(x===t)));
-  $("vq").hidden=t.dataset.v!=="q"; $("vp").hidden=t.dataset.v!=="p";
-}));
-$("btnRef").addEventListener("click",actualizar);
-
-$("mas").addEventListener("click",()=>{limite+=20;renderQuiniela()});
-$("buscar").addEventListener("input",e=>{filtro=norm(e.target.value);renderQuiniela()});
-const fijar=e=>{const el=e.target.closest("[data-id]");if(!el)return;const id=el.dataset.id;pinId=pinId===id?null:id;try{pinId?localStorage.setItem(KEY+"_pin",pinId):localStorage.removeItem(KEY+"_pin")}catch(x){}renderQuiniela()};
-$("tbody").addEventListener("click",fijar); $("cards").addEventListener("click",fijar);
-cargar(); aplicarManual(); pintar();
-if(ultima)$("stamp").textContent="Último dato guardado: "+hora(ultima);
-iniciarNube();
-actualizar();
-setInterval(()=>{ // 30 s con partido en vivo, 60 s sin partido; pausado si la pestaña está oculta
-  if(document.hidden)return;
-  if(partidos.some(m=>m.estado==="EN VIVO")||!ultima||Date.now()-Date.parse(ultima)>=59000)actualizar();
-},30000);
-document.addEventListener("visibilitychange",()=>{
-  if(!document.hidden&&(!ultima||Date.now()-Date.parse(ultima)>60000))actualizar();
-});
-</script>
-</body>
-</html>
- 
+const limpia=v=>{v=String(v||"").trim().toUpperCase();re
