@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quiniela · Liga BBVA MX · Jornada 13</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F3F5F8;--surface:#fff;--ink:#0F1B2D;--muted:#586578;--line:#D9E0E8;--navy:#10294A;--navy2:#0A1C34;--hit:#1E7A5A;--hit-bg:#E2F1EA;--gold:#B38A1E;--gold-bg:#F7F0DA;--live:#B42318;--warn:#B54708;--chip:#E9EEF4;--r:12px;--sh:0 1px 2px rgba(16,41,74,.06),0 4px 14px rgba(16,41,74,.06);--btn:#10294A;--btn-ink:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0A101C;--surface:#121A2A;--ink:#E7ECF3;--muted:#98A4B6;--line:#243047;--navy:#16294A;--navy2:#0E1B33;--hit:#3FB58C;--hit-bg:#12332A;--gold:#D4B04F;--gold-bg:#2C2610;--live:#F0776C;--warn:#E8A15C;--chip:#1A2539;--btn:#6FA3DC;--btn-ink:#08121F;--sh:0 1px 2px rgba(0,0,0,.4),0 4px 14px rgba(0,0,0,.35)}}
+:root[data-theme="dark"]{--bg:#0A101C;--surface:#121A2A;--ink:#E7ECF3;--muted:#98A4B6;--line:#243047;--navy:#16294A;--navy2:#0E1B33;--hit:#3FB58C;--hit-bg:#12332A;--gold:#D4B04F;--gold-bg:#2C2610;--live:#F0776C;--warn:#E8A15C;--chip:#1A2539;--btn:#6FA3DC;--btn-ink:#08121F;--sh:0 1px 2px rgba(0,0,0,.4),0 4px 14px rgba(0,0,0,.35)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",system-ui,Arial,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.4}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--btn);color:var(--btn-ink);padding:8px 12px;border-radius:8px;z-index:50}
+.skip:focus{left:8px}
+.app{width:min(1100px,100%);margin:auto;padding:14px 14px 40px}
+.hero{background:var(--navy);color:#fff;border-radius:16px;padding:18px;box-shadow:var(--sh)}
+.hero-top{display:flex;align-items:center;gap:14px}
+.logo{flex:none;width:50px;height:50px;border-radius:12px;border:2px solid rgba(255,255,255,.55);display:grid;place-items:center;font:700 22px "IBM Plex Sans Condensed",sans-serif;letter-spacing:.04em}
+.ht{flex:1;min-width:0}
+.kicker{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;opacity:.75}
+.title{font:700 clamp(28px,7vw,38px)/1.05 "IBM Plex Sans Condensed",sans-serif;text-transform:uppercase;margin:3px 0 0;letter-spacing:.01em}
+.sub{font-size:13px;opacity:.8;margin-top:2px}
+.pill{flex:none;align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 11px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25)}
+.pill.live{background:var(--live);border-color:var(--live)}
+.pill.curso{background:rgba(255,255,255,.22)}
+.pill.fin{background:var(--hit);border-color:var(--hit)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:16px}
+.stat{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:9px 12px}
+.stat small{display:block;font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;opacity:.75}
+.stat b{font:700 26px/1.15 "IBM Plex Sans Condensed",sans-serif}
+.meta{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:12px;font-size:13px;opacity:.9}
+.meta b{font-weight:700}
+.bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:12px 2px 0;font-size:12.5px;color:var(--muted);font-weight:500}
+.bar .sp{flex:1}
+.refresh{display:inline-flex;align-items:center;gap:8px;min-height:44px;border:0;background:var(--btn);color:var(--btn-ink);border-radius:10px;padding:0 16px;font-weight:600;font-size:14px}
+.refresh:disabled{opacity:.55;cursor:wait}
+.refresh svg{width:16px;height:16px}
+.tabs{display:flex;gap:4px;background:var(--chip);border-radius:12px;padding:4px;margin:14px 0 0}
+.tab{flex:1;min-height:44px;border:0;background:transparent;border-radius:9px;font-weight:600;font-size:14px;color:var(--muted)}
+.tab[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.view{margin-top:14px}
+.view[hidden]{display:none}
+.sbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:15;background:var(--bg);padding:6px 0 10px}
+.search{display:flex;align-items:center;gap:10px;background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:0 14px;min-height:48px}
+.search:focus-within{border-color:var(--btn)}
+.search svg{flex:none;width:18px;height:18px;color:var(--muted)}
+.search input{flex:1;border:0;background:transparent;outline:0;font-size:16px;min-width:0}
+.leaders{margin-bottom:12px;padding:11px 14px;border-radius:10px;background:var(--gold-bg);border-left:4px solid var(--gold);font-weight:600;font-size:14px}
+.leaders[hidden]{display:none}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden}
+.ph{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line)}
+.pt{font:700 18px "IBM Plex Sans Condensed",sans-serif;text-transform:uppercase;letter-spacing:.04em}
+.lock{font-size:11.5px;font-weight:500;color:var(--muted)}
+.cuenta{margin:0;padding:8px 16px;font-size:12px;color:var(--muted);border-bottom:1px solid var(--line);background:var(--bg)}
+.tw{overflow:auto;-webkit-overflow-scrolling:touch;max-height:72vh}
+table{width:100%;border-collapse:separate;border-spacing:0;min-width:660px}
+th{position:sticky;top:0;z-index:2;padding:10px 4px;font-size:12px;font-weight:600;color:var(--muted);background:var(--chip);border-bottom:3px solid var(--line);white-space:nowrap}
+th .vs{display:block;font-size:9.5px;font-weight:500;opacity:.85}
+th.hf{border-bottom-color:var(--hit)}
+th.hl{border-bottom-color:var(--live)}
+th.hc{border-bottom-color:#8C97A6}
+th.hc .vs{text-decoration:line-through}
+td{padding:7px 4px;text-align:center;border-bottom:1px solid var(--line)}
+tr:last-child td{border-bottom:0}
+td.pos{width:44px;font:700 17px "IBM Plex Sans Condensed",sans-serif;color:var(--muted)}
+td.name,th.name{text-align:left;min-width:170px;position:sticky;left:0;z-index:1;background:var(--surface);font-weight:600;font-size:14px;padding-left:10px}
+th.name{z-index:3;background:var(--chip)}
+tbody tr{cursor:pointer}
+tbody tr:hover td{background:var(--chip)}
+tr.lider td,tr.lider td.name{background:var(--gold-bg)}
+tr.lider td.name{box-shadow:inset 4px 0 var(--gold)}
+tr.pin td,tr.pin td.name{background:var(--hit-bg)}
+tr.pin td.name{box-shadow:inset 4px 0 var(--hit)}
+.tag{display:inline-block;margin-left:8px;padding:1px 7px;border-radius:999px;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;vertical-align:middle}
+.tag.tl{background:var(--gold);color:#1B1400}
+.tag.tp{background:var(--hit);color:#fff}
+.vacio{padding:26px;color:var(--muted);font-weight:500;text-align:center}
+.pk{position:relative;width:34px;height:34px;margin:auto;border-radius:8px;display:grid;place-items:center;font:700 16px "IBM Plex Sans Condensed",sans-serif;background:var(--chip);color:var(--ink)}
+.pk.hit{background:var(--hit);color:#fff}
+.pk.hit::after{content:"✓";position:absolute;top:-5px;right:-5px;width:15px;height:15px;border-radius:50%;background:var(--surface);color:var(--hit);border:1px solid var(--hit);font:700 9px/1 "IBM Plex Sans",sans-serif;display:grid;place-items:center}
+.pk.live{outline:2px dashed var(--live);outline-offset:1px}
+.pk.canc{opacity:.4;text-decoration:line-through}
+.pk.empty{background:transparent;border:1.5px dashed var(--line);color:var(--muted)}
+td.pts{width:72px}
+.pts div{display:inline-block;min-width:42px;padding:2px 9px;border-radius:999px;font:700 19px "IBM Plex Sans Condensed",sans-serif;background:var(--chip);color:var(--muted)}
+.pts div.g{background:var(--hit);color:#fff}
+.pts div.l{background:var(--gold);color:#1B1400}
+.cards{display:none}
+.pc{background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer}
+.pc.lider{border-color:var(--gold);background:var(--gold-bg)}
+.pc.pin{border-color:var(--hit);background:var(--hit-bg)}
+.pc header{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.rk{flex:none;min-width:32px;height:32px;padding:0 6px;border-radius:8px;background:var(--chip);display:grid;place-items:center;font:700 16px "IBM Plex Sans Condensed",sans-serif}
+.pn{flex:1;min-width:0;font-weight:600;font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pp{flex:none;font:700 17px "IBM Plex Sans Condensed",sans-serif;padding:2px 11px;border-radius:999px;background:var(--chip);color:var(--muted)}
+.pp.g{background:var(--hit);color:#fff}
+.pp.l{background:var(--gold);color:#1B1400}
+.pg{display:grid;grid-template-columns:repeat(9,1fr);gap:4px}
+.pgi{display:flex;flex-direction:column;align-items:center;gap:3px;min-width:0}
+.pgi small{font-size:8.5px;line-height:1.15;text-align:center;color:var(--muted);font-weight:600}
+.pgi.cl small{text-decoration:line-through}
+.pgi .pk{width:100%;max-width:34px;height:32px;font-size:15px;border-radius:7px}
+.more{padding:12px 16px;text-align:center}
+.more[hidden]{display:none}
+.mas{min-height:44px;padding:0 20px;border-radius:10px;border:1.5px solid var(--btn);background:transparent;color:var(--ink);font-weight:600;font-size:14px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;padding:12px 16px 14px;border-top:1px solid var(--line)}
+.li{display:flex;align-items:center;gap:7px;font-size:11.5px;font-weight:500;color:var(--muted)}
+.dot{width:14px;height:14px;border-radius:4px;background:var(--chip);flex:none}
+.dot.g{background:var(--hit)}
+.dot.l{background:transparent;outline:2px dashed var(--live);outline-offset:-1px}
+.dot.y{background:var(--gold)}
+.dot.r{background:var(--hit-bg);border:1px solid var(--hit)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding:14px 16px 0}
+.chip{display:flex;align-items:center;gap:7px;background:var(--chip);border-radius:999px;padding:6px 12px;font-size:12px;font-weight:600}
+.chip i{width:9px;height:9px;border-radius:50%}
+.matches{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:14px 16px}
+.match{background:var(--bg);border:1px solid var(--line);border-left:5px solid var(--line);border-radius:10px;padding:14px}
+.match.live{border-left-color:var(--live)}
+.match.final{border-left-color:var(--hit)}
+.match.canc{border-left-color:#8C97A6;opacity:.85}
+.match.pospu{border-left-color:var(--warn)}
+.mt{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.mn{font-size:11px;font-weight:600;letter-spacing:.07em;color:var(--muted);text-transform:uppercase}
+.st{border-radius:999px;padding:3px 10px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;background:var(--chip);color:var(--muted)}
+.st.live{background:var(--live);color:#fff;animation:pulse 1.4s infinite}
+.st.fin{background:var(--hit);color:#fff}
+.st.canc{background:#6F7B8B;color:#fff}
+.st.pospu{background:var(--warn);color:#fff}
+@keyframes pulse{50%{opacity:.6}}
+.tm{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center}
+.team{padding:8px;border-radius:8px;min-width:0}
+.tn{font:600 19px/1.1 "IBM Plex Sans Condensed",sans-serif;text-transform:uppercase}
+.team.r .tn{text-align:right}
+.team.win{background:var(--hit-bg);color:var(--hit)}
+.team.loss{opacity:.6}
+.team.draw{background:var(--chip)}
+.sc{font:700 30px "IBM Plex Sans Condensed",sans-serif;min-width:70px;text-align:center}
+.sc.live{color:var(--live)}
+.md{margin-top:10px;font-size:12px;font-weight:500;color:var(--muted)}
+.md.live{color:var(--live);font-weight:600}
+.md.warn{color:var(--warn)}
+.footer{padding:18px 4px 0;color:var(--muted);font-size:11.5px;text-align:center;line-height:1.6}
+@media (max-width:759px){.tw{display:none}.cards{display:grid;gap:8px;padding:12px}.lock{font-size:11px;max-width:48%;text-align:right}}
+@media (max-width:640px){
+ .app{padding:10px 10px 96px}
+ .hero{padding:14px}
+ .stats{grid-template-columns:repeat(2,1fr)}
+ .matches{grid-template-columns:1fr}
+ .tn{font-size:17px}
+ .sc{font-size:26px}
+ .tabs{position:fixed;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px));margin:0;z-index:20;background:var(--surface);border:1px solid var(--line);box-shadow:0 8px 28px rgba(0,0,0,.25)}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+<div class="app">
+<header class="hero">
+  <div class="hero-top">
+    <div class="logo" aria-hidden="true">MX</div>
+    <div class="ht"><div class="kicker">Liga BBVA MX · Apertura 2026</div><h1 class="title">Jornada 13</h1><div class="sub">Quiniela · 20 y 21 de octubre</div></div>
+    <span class="pill" id="estado" role="status">Por iniciar</span>
+  </div>
+  <div class="stats">
+    <div class="stat"><small>Finalizados</small><b id="sF">0/9</b></div>
+    <div class="stat"><small>En vivo</small><b id="sV">0</b></div>
+    <div class="stat"><small>Pendientes</small><b id="sPend">9</b></div>
+    <div class="stat"><small>Máx. puntos</small><b id="sM">0</b></div>
+  </div>
+  <div class="meta"><span><b id="sP">0</b> participantes</span><span>Premio <b id="pozo">$0</b> · 90% del pozo ($50 por boleto)</span></div>
+</header>
+
+<div class="bar"><span id="stamp" aria-live="polite">Cargando…</span><span id="nube"></span><span class="sp"></span>
+  <button class="refresh" id="btnRef" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>Actualizar</button></div>
+
+<nav class="tabs" role="tablist" aria-label="Secciones">
+  <button class="tab" role="tab" type="button" aria-selected="true" data-v="q">Quiniela</button>
+  <button class="tab" role="tab" type="button" aria-selected="false" data-v="p">Partidos</button>
+</nav>
+
+<main id="main">
+<section id="vq" class="view">
+  <div class="sbar"><label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="buscar" type="search" placeholder="Busca tu nombre o número…" autocomplete="off" aria-label="Buscar participante"></label></div>
+  <div class="leaders" id="lideres" hidden></div>
+  <div class="panel">
+    <div class="ph"><div class="pt">Tabla de posiciones</div><div class="lock">Solo lectura · toca una fila para fijarla</div></div>
+    <p class="cuenta" id="cuenta" aria-live="polite"></p>
+    <div class="tw"><table><caption class="sr" style="position:absolute;left:-999px">Pronósticos por participante</caption><thead id="thead"></thead><tbody id="tbody"></tbody></table></div>
+    <div id="cards" class="cards" aria-label="Participantes"></div>
+    <div class="more" id="moreBox" hidden><button class="mas" id="mas" type="button"></button></div>
+    <div class="legend">
+      <div class="li"><span class="dot g"></span>Acierto (✓)</div>
+      <div class="li"><span class="dot l"></span>Partido en vivo, provisional</div>
+      <div class="li"><span class="dot y"></span>Líder</div>
+      <div class="li"><span class="dot"></span>Sin acierto o pendiente</div>
+    </div>
+  </div>
+</section>
+
+<section id="vp" class="view" hidden>
+  <div class="panel">
+    <div class="ph"><div class="pt">Partidos</div><div class="lock">Solo lectura</div></div>
+    <div class="chips" id="chips"></div>
+    <div id="matches" class="matches"></div>
+    <div class="legend">
+      <div class="li"><span class="dot r"></span>Ganador</div>
+      <div class="li"><span class="dot"></span>Empate o pendiente</div>
+    </div>
+  </div>
+</section>
+</main>
+
+<div class="footer">Marcadores automáticos (ESPN) · cada 30 s con partido en vivo, cada 60 s sin partido<br>Los partidos en vivo suman puntos provisionales hasta que terminen</div>
+</div>
+
+<script>
+const VERSION="ligamx-j13-2026-v1", KEY="quiniela_ligamx_j13_2026_v1";
+const MANUAL={}; // ej.: {3:{estado:"POSPUESTO"}}  (número de partido → estado)
+const aplicarManual=()=>{partidos=partidos.map(m=>({...m,...(MANUAL[m.n]||{})}))};
+const OCULTAR_NOMBRES=false; // true = en pantalla solo "Participante 01, 02…" (los datos internos no se tocan)
+const nom=g=>OCULTAR_NOMBRES||!g.nombre?"Participante "+String(g.orden).padStart(2,"0"):g.nombre;
+const PREMIO_PCT=0.9; // premio = 90% del pozo (con 50 boletos de $50 da $2,250, como en la hoja)
+const CUOTA=50; // pesos por boleto; el pozo = boletos × cuota
+const CONTAR_EN_VIVO=true; // true = los partidos en vivo suman puntos provisionales; false = solo finalizados
+
+/* ===== EQUIPOS: [nombre, siglas, ...alias exactos (como los escribe ESPN)] ===== */
+const EQ={
+ PUEBLA:["Puebla","PUE","puebla","club puebla"],
+ LEON:["León","LEO","leon","club leon"],
+ TIGRES:["Tigres","TIG","tigres","tigres uanl","uanl"],
+ TOLUCA:["Toluca","TOL","toluca","deportivo toluca"],
+ JUAREZ:["Juárez","JUA","juarez","fc juarez","bravos"],
+ XOLOS:["Tijuana","TIJ","xolos","tijuana","club tijuana","xolos de tijuana","tijuana xolos"],
+ QUERETARO:["Querétaro","QRO","queretaro","queretaro fc","gallos blancos"],
+ ATLANTE:["Atlante","ATE","atlante","atlante fc"],
+ ATLAS:["Atlas","ATS","atlas","atlas fc"],
+ CHIVAS:["Chivas","CHI","chivas","guadalajara","cd guadalajara","chivas de guadalajara"],
+ AMERICA:["América","AME","america","club america"],
+ MONTERREY:["Monterrey","MTY","monterrey","cf monterrey","rayados"],
+ SANLUIS:["San Luis","SLP","san luis","atletico san luis","atletico de san luis"],
+ SANTOS:["Santos","SAN","santos","santos laguna"],
+ PACHUCA:["Pachuca","PAC","pachuca","cf pachuca"],
+ NECAXA:["Necaxa","NEC","necaxa","club necaxa"],
+ PUMAS:["Pumas","PUM","pumas","pumas unam","unam"],
+ CRUZAZUL:["Cruz Azul","CAZ","cruz azul"]
+};
+const PARTIDOS0=[["TIGRES","LEON"],["CHIVAS","NECAXA"],["JUAREZ","ATLANTE"],["SANLUIS","QUERETARO"],["TOLUCA","XOLOS"],["ATLAS","AMERICA"],["PUEBLA","MONTERREY"],["PACHUCA","CRUZAZUL"],["SANTOS","PUMAS"]];
+
+/* ===== PARTICIPANTES (agrega los nuevos al final) ===== */
+const GENTE0=[
+["Johan Vecino","LLVELVVVV"],["Chela R.S","VLVELVVVL"],["Porno Taquero 69","LLVLLVVVV"],["Candido Lopez","LLLLLVVEL"],["Santiago","LLLELVLLE"],
+["Marcos","LLEVLVLEL"],["Fores","LLVELVVVE"],["Alfredo 28","LLVVLVLLL"],["Eder Tienda","LLVVLVVEV"],["Hielera","ELLLLEEVL"],
+["Francisco Rios","ELEELVVVL"],["Tortilleria Eje3","LLVELVVVL"],["Chivas y ya","LLEELEELL"],["Emily B.B","LEVELVELE"],["Monica ♡♡","VLVELVVEL"],
+["Gerardo Tienda","VLLELVVEL"],["Manuel *","LLVLLELLV"],["Alexa","LLVLLVEVV"],["Jaime Jimmy","LLVVEVEVV"],["Chalan Jimmy","LEVELVVEV"],
+["Goofy","LVEELVVLE"],["Panaderia 1","LELLLLLLV"],["Panaderia 2","ELELEVEVE"],["Negro","LEVEVVVVL"],["Papas","LLELLVVLL"],
+["Ramon MTZ","LLEELEVVE"],["Yovan","LLEVLLVVV"],["Risser","LVLLEVLLE"],["Nacho Azul","LLEVLVVVE"],["Obrador","LELLEELEE"],
+["La Monja","VLVVLVVEL"],["La Momia","VELELLEEL"],["Elegidos 05","LLLLLEVEV"],["Victor Tamales","ELELLEVEV"],["Turbo","LLVVLVVVE"],
+["Kirby","ELVVLEEVL"],["Julieta","VEEVVELEL"],["Quirino","LLVLLLVVE"],["Liz Junior","LEVVVVLLV"],["Metatron","ELEVLVVEL"],
+["Tortillas 1","LLLELEVVE"],["Tortillas 2","VLVLLLLVL"],["Raspados","VLEELEVEV"],["Lopez Obrador","LLVELVVEV"],["El Rubio","EEEVLVEEE"],
+["Teo 1","LLELLEVLL"],["Teo 2","VLELLLVLV"],["Teo 3","LLVVLVLLE"],["Felix Pollo","LLLLLVLEE"],["Arturo","LLEELVVVL"]
+];
+
+/* ===== Estado ===== */
+const $=id=>document.getElementById(id);
+const N=PARTIDOS0.length;
+const limpia=v=>{v=String(v||"").trim().toUpperCase();return v&&"LEV".includes(v)?v:""};
+const padPicks=a=>{a=(a||[]).map(limpia);while(a.length<N)a.push("");return a.slice(0,N)};
+let gente=GENTE0.map((x,i)=>({id:"p"+String(i+1).padStart(2,"0"),orden:i+1,nombre:x[0],picks:padPicks(x[1].split(""))}));
+let partidos=PARTIDOS0.map((p,i)=>({n:i+1,hk:p[0],ak:p[1],local:EQ[p[0]][0],visitante:EQ[p[1]][0],gl:null,gv:null,estado:"PENDIENTE",fecha:null,reloj:""}));
+let ultima=null, filtro="", pinId=null, limite=20;
+try{pinId=localStorage.getItem(KEY+"_pin")}catch(e){}
+
+/* ===== Utilidades ===== */
+const esc=t=>String(t).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const norm=t=>String(t||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim();
+const coincide=(nombre,k)=>{const n=norm(nombre);return EQ[k].slice(2).some(a=>norm(a)===n)}; // coincidencia exacta
+const num=v=>v!==null&&v!==undefined&&v!==""&&Number.isFinite(Number(v));
+const fechaTxt=iso=>{const d=new Date(iso);return iso&&!isNaN(d)?new Intl.DateTimeFormat("es-MX",{weekday:"short",day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"}).format(d):""};
+const hora=iso=>new Date(iso).toLocaleTimeString("es-MX",{hour:"2-digit",minute:"2-digit",second:"2-digit"});
+const esCerrado=m=>["CANCELADO","POSPUESTO","SUSPENDIDO"].includes(m.estado);
+
+function res(m){ // resultado 1X2 (L/E/V); en vivo solo si CONTAR_EN_VIVO
+  if(!m||!num(m.gl)||!num(m.gv))return"";
+  if(m.estado!=="FINALIZADO"&&!(CONTAR_EN_VIVO&&m.estado==="EN VIVO"))return"";
+  const a=Number(m.gl),b=Number(m.gv);
+  return a>b?"L":a<b?"V":"E";
+}
+const puntos=g=>g.picks.reduce((s,p,i)=>{const r=res(partidos[i]);return s+(r&&p===r?1:0)},0);
+
+/* ===== Caché local (solo marcadores) ===== */
+function guardar(){try{localStorage.setItem(KEY,JSON.stringify({v:VERSION,partidos,ultima}))}catch(e){}}
+function cargar(){
+  try{
+    const d=JSON.parse(localStorage.getItem(KEY)||"null");
+    if(!d||d.v!==VERSION)return;
+    if(Array.isArray(d.partidos)&&d.partidos.length===N)partidos=d.partidos;
+    ultima=d.ultima||null;
+  }catch(e){}
+}
+
+/* ===== Render: quiniela ===== */
+function claseHead(m){
+  if(m.estado==="FINALIZADO")return"hf";
+  if(m.estado==="EN VIVO")return"hl";
+  return esCerrado(m)?"hc":"";
+}
+function celdaClase(m,v){
+  if(!v)return"empty";
+  if(esCerrado(m))return"canc";
+  const r=res(m); if(!r)return"";
+  return (v===r?"hit":"miss")+(m.estado==="EN VIVO"?" live":"");
+}
+function estadoGeneral(){
+  const f=partidos.filter(m=>m.estado==="FINALIZADO").length, c=partidos.filter(esCerrado).length;
+  let t="Por iniciar",k="";
+  if(partidos.some(m=>m.estado==="EN VIVO")){t="En juego";k="live"}
+  else if(f+c===N){t="Finalizada";k="fin"}
+  else if(f>0){t="En curso";k="curso"}
+  const el=$("estado"); el.textContent=t; el.className="pill "+k;
+}
+function renderQuiniela(){
+  $("thead").innerHTML="<tr><th>#</th><th class='name'>Participante</th>"+partidos.map(m=>`<th class="${claseHead(m)}" title="${esc(m.estado)}">${m.n}<span class="vs">${EQ[m.hk][1]}-${EQ[m.ak][1]}</span></th>`).join("")+"<th>Pts</th></tr>";
+  const pt=new Map(gente.map(g=>[g.id,puntos(g)]));
+  const max=Math.max(0,...pt.values());
+  const ord=[...gente].sort((a,b)=>pt.get(b.id)-pt.get(a.id)||a.orden-b.orden);
+  let rank=0,prev=null; const filas=[];
+  ord.forEach((g,i)=>{
+    const p=pt.get(g.id); if(p!==prev){rank=i+1;prev=p}
+    const nm=nom(g);
+    if(filtro&&!norm(nm).includes(filtro))return;
+    const lid=max>0&&p===max, pin=g.id===pinId, cls=((lid?" lider":"")+(pin?" pin":"")).trim(), cp=lid?"l":(p>0?"g":"z");
+    const tags=(lid?'<span class="tag tl">Líder</span>':'')+(pin?'<span class="tag tp">Fijado</span>':'');
+    const pick=(m,j)=>{const v=g.picks[j]||"";return `<div class="pk ${celdaClase(m,v)}" title="Partido ${m.n}: ${v||"sin pronóstico"}">${v||"·"}</div>`};
+    const tr=`<tr class="${cls}" data-id="${g.id}"><td class="pos">${rank}</td><td class="name">${esc(nm)}${tags}</td>${partidos.map((m,j)=>`<td>${pick(m,j)}</td>`).join("")}<td class="pts"><div class="${cp}">${p}</div></td></tr>`;
+    const card=`<article class="pc ${cls}" data-id="${g.id}"><header><span class="rk">${rank}</span><span class="pn">${esc(nm)}${tags}</span><span class="pp ${cp}">${p} pt${p===1?"":"s"}</span></header><div class="pg">${partidos.map((m,j)=>`<div class="pgi${esCerrado(m)?" cl":""}"><small>${EQ[m.hk][1]}<br>${EQ[m.ak][1]}</small>${pick(m,j)}</div>`).join("")}</div></article>`;
+    filas.push({id:g.id,tr,card});
+  });
+  filas.sort((a,b)=>(b.id===pinId)-(a.id===pinId));
+  const vis=filtro?filas:filas.slice(0,limite);
+  $("tbody").innerHTML=vis.map(f=>f.tr).join("")||`<tr><td colspan="12" class="vacio">Sin resultados para esa búsqueda</td></tr>`;
+  $("cards").innerHTML=vis.map(f=>f.card).join("")||`<p class="vacio">Sin resultados para esa búsqueda</p>`;
+  const resto=filas.length-vis.length;
+  $("moreBox").hidden=resto<=0;
+  $("mas").textContent=`Mostrar ${Math.min(20,resto)} más (${resto} restantes)`;
+  $("cuenta").textContent=filtro?`${filas.length} resultado${filas.length===1?"":"s"} para tu búsqueda`:`Mostrando ${vis.length} de ${gente.length} participantes`;
+  $("sP").textContent=gente.length;
+  $("pozo").textContent="$"+Math.round(gente.length*CUOTA*PREMIO_PCT).toLocaleString("es-MX");
+  $("sF").textContent=partidos.filter(m=>m.estado==="FINALIZADO").length+"/"+N;
+  $("sV").textContent=partidos.filter(m=>m.estado==="EN VIVO").length;
+  $("sPend").textContent=partidos.filter(m=>m.estado==="PENDIENTE").length;
+  $("sM").textContent=max;
+  const nl=ord.filter(g=>pt.get(g.id)===max), box=$("lideres");
+  if(max>0){
+    box.hidden=false;
+    box.innerHTML=`${nl.length>1?"Líderes":"Líder"} con ${max} pt${max>1?"s":""}: `+nl.slice(0,4).map(g=>esc(nom(g))).join(", ")+(nl.length>4?` y ${nl.length-4} más`:"");
+  }else box.hidden=true;
+}
+
+/* ===== Render: partidos ===== */
+const ESTADOS={
+  "EN VIVO":{c:"live",t:"En vivo",col:"var(--red)"},
+  "FINALIZADO":{c:"fin",t:"Finalizado",col:"var(--green)"},
+  "PENDIENTE":{c:"",t:"Pendiente",col:"var(--gray)"},
+  "CANCELADO":{c:"canc",t:"Cancelado",col:"#777"},
+  "POSPUESTO":{c:"pospu",t:"Pospuesto",col:"var(--orange)"},
+  "SUSPENDIDO":{c:"pospu",t:"Suspendido",col:"var(--orange)"}
+};
+function claseEq(m,lado){
+  if(!num(m.gl)||!num(m.gv)||m.estado==="PENDIENTE"||esCerrado(m))return"";
+  const a=Number(m.gl),b=Number(m.gv);
+  if(a===b)return"draw";
+  return (lado==="l"?a>b:b>a)?"win":"loss";
+}
+function renderPartidos(){
+  const cuenta={};
+  partidos.forEach(m=>cuenta[m.estado]=(cuenta[m.estado]||0)+1);
+  $("chips").innerHTML=Object.keys(ESTADOS).filter(k=>cuenta[k]).map(k=>`<div class="chip"><i style="background:${ESTADOS[k].col}"></i>${ESTADOS[k].t} · ${cuenta[k]}</div>`).join("");
+  $("matches").innerHTML=partidos.map(m=>{
+    const e=ESTADOS[m.estado]||ESTADOS.PENDIENTE, vivo=m.estado==="EN VIVO";
+    const marc=num(m.gl)&&num(m.gv)&&!esCerrado(m)&&m.estado!=="PENDIENTE"?`${m.gl} - ${m.gv}`:"—";
+    let pie="";
+    if(vivo)pie=`<div class="md live">${esc(m.reloj||"En juego")}</div>`;
+    else if(esCerrado(m))pie=`<div class="md warn">${e.t}${m.fecha?" · programado "+esc(fechaTxt(m.fecha)):""} · sin puntos</div>`;
+    else if(m.fecha)pie=`<div class="md">${esc(fechaTxt(m.fecha))}</div>`;
+    return `<article class="match ${e.c}"><div class="mt"><div class="mn">PARTIDO ${m.n}</div><div class="st ${e.c}">${e.t}</div></div>
+      <div class="tm"><div class="team ${claseEq(m,"l")}"><div class="tn">${esc(m.local)}</div></div>
+      <div class="sc ${vivo?"live":""}">${marc}</div>
+      <div class="team r ${claseEq(m,"v")}"><div class="tn">${esc(m.visitante)}</div></div></div>${pie}</article>`;
+  }).join("");
+}
+function pintar(){renderQuiniela();renderPartidos();estadoGeneral()}
+
+/* ===== ESPN ===== */
+const BASE="https://site.api.espn.com/apis/site/v2/sports/soccer/mex.1/scoreboard";
+const DIAS=["20261019","20261020","20261021","20261022"];
+async function getJSON(url){
+  const c=new AbortController(),t=setTimeout(()=>c.abort(),12000);
+  try{const r=await fetch(url,{signal:c.signal,cache:"no-store"});if(!r.ok)throw new Error("HTTP "+r.status);return await r.json()}
+  finally{clearTimeout(t)}
+}
+/* El marcador "de hoy" solo trae los partidos del día; por eso se pide también cada día por separado */
+async function fuenteESPN(){
+  const urls=[BASE+"?limit=200",...DIAS.map(d=>BASE+"?dates="+d)];
+  const rs=await Promise.allSettled(urls.map(getJSON));
+  const eventos=new Map(); let ok=0;
+  rs.forEach(r=>{if(r.status==="fulfilled"&&Array.isArray(r.value?.events)){ok++;r.value.events.forEach(e=>eventos.set(e.id,e))}});
+  if(!ok)throw new Error("ESPN sin respuesta");
+  return [...eventos.values()];
+}
+const nomEq=t=>t?.displayName||t?.shortDisplayName||t?.name||"";
+function estadoEspn(t){
+  const nom=String(t.name||"").toUpperCase(), st=t.state;
+  if(nom.includes("POSTPONED"))return"POSPUESTO";
+  if(nom.includes("CANCEL"))return"CANCELADO";
+  if(nom.includes("ABANDON")||nom.includes("SUSPEND"))return"SUSPENDIDO";
+  if(st==="in")return"EN VIVO";
+  if(st==="post"||t.completed===true)return"FINALIZADO";
+  return"PENDIENTE";
+}
+function buscar(eventos,m){
+  for(const e of eventos){
+    const comp=e.competitions?.[0]; if(!comp)continue;
+    const h=comp.competitors?.find(x=>x.homeAway==="home"), a=comp.competitors?.find(x=>x.homeAway==="away");
+    if(!h||!a)continue;
+    const hn=nomEq(h.team), an=nomEq(a.team);
+    if(coincide(hn,m.hk)&&coincide(an,m.ak))return{e,comp,L:h,V:a};
+    if(coincide(hn,m.ak)&&coincide(an,m.hk))return{e,comp,L:a,V:h}; // orientado al orden de la quiniela
+  }
+  return null;
+}
+function fusionar(eventos){
+  return partidos.map(m=>{
+    const f=buscar(eventos,m); if(!f)return m; // si ESPN no lo trae, se conserva lo último
+    const t=f.e.status?.type||f.comp.status?.type||{};
+    const est=estadoEspn(t);
+    return {...m,
+      gl:num(f.L.score)?Number(f.L.score):null, gv:num(f.V.score)?Number(f.V.score):null,
+      estado:est, fecha:f.e.date||f.comp.date||m.fecha,
+      reloj:est==="EN VIVO"?(t.shortDetail||t.detail||""):""};
+  });
+}
+
+let cargando=false;
+async function actualizar(){
+  if(cargando)return; cargando=true; $("btnRef").disabled=true;
+  try{
+    partidos=fusionar(await fuenteESPN()); aplicarManual(); ultima=new Date().toISOString(); guardar(); pintar();
+    $("stamp").textContent=(partidos.some(m=>m.estado==="EN VIVO")?"● En vivo · ":"")+"Actualizado: "+hora(ultima);
+  }catch(e){
+    console.warn("ESPN",e);
+    $("stamp").textContent=ultima?"Sin conexión con ESPN · último dato guardado: "+hora(ultima):"Sin conexión con ESPN";
+  }finally{cargando=false;$("btnRef").disabled=false}
+}
+
+/* ===== Sincronización en línea (solo lectura) ===== */
+async function iniciarNube(){
+  try{
+    if(!window.claude||!window.claude.use)return;
+    const db=await window.claude.use("db"); if(!db)return;
+    $("nube").textContent="Sincronizando…";
+    db.collection("participantes_j13").orderBy("orden").onSnapshot(snap=>{
+      const lista=snap.docs.map(d=>{const x=d.data()||{};return{id:d.id,nombre:String(x.nombre||""),orden:Number(x.orden)||0,picks:padPicks(x.picks)}});
+      if(lista.length){gente=lista;renderQuiniela()}
+      $("nube").textContent="Sincronizado en línea";
+    },e=>{console.warn("nube",e);$("nube").textContent="Sin sincronización en línea (datos locales)"});
+  }catch(e){console.warn(e)}
+}
+
+/* ===== Eventos y arranque ===== */
+document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{
+  document.querySelectorAll(".tab").forEach(x=>x.setAttribute("aria-selected",String(x===t)));
+  $("vq").hidden=t.dataset.v!=="q"; $("vp").hidden=t.dataset.v!=="p";
+}));
+$("btnRef").addEventListener("click",actualizar);
+
+$("mas").addEventListener("click",()=>{limite+=20;renderQuiniela()});
+$("buscar").addEventListener("input",e=>{filtro=norm(e.target.value);renderQuiniela()});
+const fijar=e=>{const el=e.target.closest("[data-id]");if(!el)return;const id=el.dataset.id;pinId=pinId===id?null:id;try{pinId?localStorage.setItem(KEY+"_pin",pinId):localStorage.removeItem(KEY+"_pin")}catch(x){}renderQuiniela()};
+$("tbody").addEventListener("click",fijar); $("cards").addEventListener("click",fijar);
+cargar(); aplicarManual(); pintar();
+if(ultima)$("stamp").textContent="Último dato guardado: "+hora(ultima);
+iniciarNube();
+actualizar();
+setInterval(()=>{ // 30 s con partido en vivo, 60 s sin partido; pausado si la pestaña está oculta
+  if(document.hidden)return;
+  if(partidos.some(m=>m.estado==="EN VIVO")||!ultima||Date.now()-Date.parse(ultima)>=59000)actualizar();
+},30000);
+document.addEventListener("visibilitychange",()=>{
+  if(!document.hidden&&(!ultima||Date.now()-Date.parse(ultima)>60000))actualizar();
+});
+</script>
+</body>
+</html>
